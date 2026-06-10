@@ -113,12 +113,6 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
         ::-webkit-scrollbar-thumb { background: #AA771C; border-radius: 10px; }
-        
-        /* App Wrapper Fade-In */
-        #app-wrapper {
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
     </style>
 </head>
 <body>
@@ -136,7 +130,7 @@
 
     <div id="app-wrapper" class="flex h-screen w-screen">
         
-        <button onclick="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 gold-border bg-[var(--bg-deep)] p-3 rounded">
+        <button onclick="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 gold-border bg-[var(--bg-deep)] p-3 rounded shadow-lg">
             <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
 
@@ -163,7 +157,7 @@
                 </button>
             </div>
 
-            <div id="scroll-canvas" class="flex-1 overflow-y-auto p-6 md:p-16 scroll-smooth relative z-10 perspective-1000">
+            <div id="scroll-canvas" class="flex-1 overflow-y-auto p-6 md:p-16 scroll-smooth relative z-10 perspective-1000 pt-20 md:pt-16">
                 <div class="max-w-4xl mx-auto pb-32" id="lesson-content">
                     </div>
             </div>
@@ -296,7 +290,6 @@
 
         // INITIALIZE APPLICATION
         window.onload = () => {
-            document.getElementById('app-wrapper').style.opacity = '1';
             initApp();
         };
 
@@ -400,4 +393,11 @@
             setTimeout(() => {
                 elements.forEach((el, index) => {
                     if(index < 3) el.classList.add('active');
-                }
+                });
+            }, 300);
+        }
+
+        // AUDIO ENGINE LOGIC
+        audioElement.onended = () => {
+            isAudioPlaying = false;
+            audioBtn.innerHTML = '🔊 [ INITIALIZE AUDIO ]
