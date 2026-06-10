@@ -3,315 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARC VAULT</title>
+    <title>ARC | THE VAULT</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@300;500;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-base: #050505;
-            --bg-surface: #0a0a0a;
-            --text-primary: #FDF4E3;
+            /* Old Money Brown Theme */
+            --bg-deep: #2c1e12;
+            --bg-mid: #4b3621;
+            --bg-light: #5C4033;
+            /* Pure Liquid Gold */
+            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #b38728, #FBF5B7, #AA771C);
+            /* Accent Colors */
+            --racing-green: #004225;
+            --vibrant-red: #FF003C;
+            --pure-cyan: #00FFFF;
+            --pure-white: #FFFFFF;
         }
-        /* Subliminal Breathing Matrix */
-        @keyframes subliminalShift {
-            0%   { --accent: #00FFFF; --glow: rgba(0, 255, 255, 0.15); } 
-            33%  { --accent: #D4AF37; --glow: rgba(212, 175, 55, 0.15); } 
-            66%  { --accent: #FF003C; --glow: rgba(255, 0, 60, 0.15); } 
-            100% { --accent: #00FFFF; --glow: rgba(0, 255, 255, 0.15); } 
-        }
-        /* Kinetic Glitch Effect */
-        @keyframes textGlitch {
-            0% { text-shadow: 1px 0 var(--accent), -1px 0 #ff003c; }
-            50% { text-shadow: -1px 0 var(--accent), 1px 0 #ff003c; }
-            100% { text-shadow: 1px 0 var(--accent), -1px 0 #ff003c; }
-        }
-        
+
         body {
-            animation: subliminalShift 120s infinite linear;
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            font-family: 'Courier New', Courier, monospace;
             margin: 0;
             overflow: hidden;
+            background: radial-gradient(circle at top right, var(--bg-light), var(--bg-deep));
+            color: var(--pure-white);
+            font-family: 'Montserrat', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        /* Dynamic Elements */
-        .dynamic-accent {
-            color: var(--accent);
-            transition: color 2s ease;
+
+        /* Typography & Aesthetics */
+        .old-money-heading {
+            font-family: 'Playfair Display', serif;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0px 4px 15px rgba(212, 175, 55, 0.2);
         }
-        .dynamic-border {
-            border-color: var(--accent) !important;
-            transition: border-color 2s ease;
+
+        .gold-border {
+            border: 1px solid #AA771C;
+            box-shadow: 0 0 10px rgba(191, 149, 63, 0.3);
         }
-        .glitch-header:hover {
-            animation: textGlitch 0.3s infinite;
+
+        /* 3D Levitation & Magic */
+        .levitate {
+            animation: float 4s ease-in-out infinite;
         }
-        
-        /* Buttons */
-        .gate-btn {
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            box-shadow: 0 0 15px var(--glow), inset 0 0 5px var(--glow);
-            transition: all 0.3s ease-in-out;
-            background: transparent;
-            cursor: pointer;
+        @keyframes float {
+            0% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(2deg); }
+            100% { transform: translateY(0px) rotateX(0deg); }
         }
-        .gate-btn:hover {
-            background-color: var(--accent);
-            color: var(--bg-base);
-            box-shadow: 0 0 30px var(--glow);
+
+        /* Scroll Reveal Magic */
+        .fly-in {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .nav-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
+        .fly-in.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
-        .nav-active {
-            background-color: rgba(255, 255, 255, 0.03);
-            border-left: 3px solid var(--accent) !important;
-            color: var(--accent) !important;
+
+        /* Kinetic Click Reaction */
+        .click-ripple {
+            position: fixed;
+            border-radius: 50%;
+            border: 2px solid var(--pure-cyan);
+            box-shadow: 0 0 20px var(--pure-cyan);
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0);
+            animation: ripple 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            z-index: 9999;
         }
-        
-        /* Action Gate Locking Mechanism */
-        #lesson-content { display: none; }
-        #action-gate { display: flex; }
+        @keyframes ripple {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+
+        /* Sidebar UI */
+        .sidebar-panel {
+            background: rgba(44, 30, 18, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(191, 149, 63, 0.2);
+        }
+
+        .nav-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(191,149,63,0.1) 0%, transparent 100%);
+            border-left: 3px solid #D4AF37;
+            color: #D4AF37;
+        }
+        .nav-item:hover:not(.locked) {
+            background: rgba(255,255,255,0.05);
+            transform: translateX(5px);
+        }
+        .locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+            color: #888;
+        }
+
+        /* Scrollbar hiding */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: #AA771C; border-radius: 10px; }
+
+        /* Security Gate */
+        #security-gate {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-deep);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease;
+        }
     </style>
 </head>
-<body class="flex h-screen w-screen select-none">
+<body>
 
-    <audio id="arc-audio" src=""></audio>
+    <script>
+        document.addEventListener('click', function(e) {
+            let ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    </script>
 
-    <div class="w-20 md:w-24 border-r border-gray-900 bg-[#030303] flex flex-col items-center py-6 space-y-6 z-30" id="sector-strip">
-        <div class="text-xl font-black tracking-tighter dynamic-accent mb-4 cursor-default">ARC</div>
-        </div>
-
-    <div class="w-64 md:w-72 border-r border-gray-900 bg-[var(--bg-surface)] flex flex-col p-4 z-20 overflow-y-auto">
-        <div class="mb-6 pb-4 border-b border-gray-900">
-            <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Current Sector</div>
-            <div id="sidebar-sector-title" class="text-sm font-black uppercase tracking-tight text-white"></div>
-        </div>
-        <div id="sidebar-modules" class="space-y-6">
-            </div>
+    <div id="security-gate">
+        <h1 class="old-money-heading text-5xl md:text-7xl mb-8 levitate text-center">ARC_VAULT</h1>
+        <p class="text-gray-400 mb-6 font-mono text-sm tracking-widest uppercase">Encrypted Sector. Enter Access Code.</p>
+        <input type="password" id="access-code" class="bg-black/50 border border-[#AA771C] text-white px-6 py-3 text-center outline-none focus:shadow-[0_0_15px_rgba(191,149,63,0.5)] transition-all mb-6 w-64" placeholder="••••••">
+        <button onclick="checkAccess()" class="gold-border px-8 py-3 uppercase tracking-widest font-black text-xs hover:bg-[#AA771C] hover:text-black transition-colors">
+            [ DECRYPT ]
+        </button>
+        <p id="error-msg" class="text-[var(--vibrant-red)] mt-4 text-xs font-bold hidden uppercase tracking-widest">Access Denied.</p>
     </div>
 
-    <div class="flex-1 flex flex-col h-full bg-[var(--bg-base)] relative z-10">
+    <div id="app-wrapper" class="flex h-screen w-screen opacity-0 hidden">
         
-        <div class="h-16 border-b border-gray-900 bg-[var(--bg-surface)] flex items-center justify-between px-6 md:px-10 z-20">
-            <span class="text-xs text-gray-500 uppercase tracking-widest hidden sm:inline">
-                SYSTEM_STATUS: <span class="text-emerald-500">ONLINE</span>
-            </span>
-            <button id="audio-toggle-btn" onclick="toggleAudio()" class="nav-btn text-xs border border-gray-800 text-gray-400 px-4 py-2 uppercase tracking-[0.2em] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all duration-300">
-                [ INITIALIZE AUDIO ]
-            </button>
-        </div>
+        <button onclick="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 gold-border bg-[var(--bg-deep)] p-3 rounded">
+            <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
 
-        <div class="bg-orange-500/5 border-b border-orange-500/10 px-6 md:px-10 py-2 text-[10px] text-orange-400/80 tracking-widest uppercase z-20">
-            Notice: Audio track utilizes automated dictation processing for operational efficiency.
-        </div>
-
-        <div class="flex-1 overflow-y-auto p-8 md:p-16 relative z-20" id="main-scroll-area">
-            <div class="max-w-3xl mx-auto">
-                <h1 id="lesson-title" class="text-3xl md:text-5xl font-black mb-8 uppercase tracking-tighter dynamic-accent glitch-header cursor-default">
-                    LOADING...
-                </h1>
-
-                <div id="action-gate" class="my-12 p-8 border border-gray-900 bg-gray-950/50 flex-col items-center justify-center text-center rounded-sm">
-                    <div class="text-xs text-gray-500 uppercase tracking-widest mb-6">Security lock engaged. Verify authorization data stream.</div>
-                    <button onclick="unlockContent()" class="gate-btn px-8 py-4 font-black uppercase tracking-[0.2em] text-xs md:text-sm">
-                        [ DECRYPT & ACCESS PROTOCOL ]
-                    </button>
-                </div>
-
-                <div id="lesson-content" class="space-y-6">
-                    <p id="lesson-text" class="text-base md:text-lg leading-relaxed text-gray-300 whitespace-pre-line select-text selection:bg-cyan-500 selection:text-black"></p>
-                    <div class="pt-8 border-t border-gray-900 text-[10px] text-gray-600 uppercase tracking-widest text-center animate-pulse">
-                        // end of data matrix stream. choose next protocol array from sidebar. //
-                    </div>
-                </div>
+        <div id="sidebar" class="sidebar-panel w-72 h-full flex-shrink-0 flex flex-col absolute md:relative z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+            <div class="p-8 border-b border-[#AA771C]/20">
+                <h2 class="old-money-heading text-3xl levitate">ARC</h2>
+                <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-2">Instant Liquidity Matrix</p>
             </div>
+            
+            <div class="flex-1 overflow-y-auto p-4 space-y-6" id="nav-container">
+                </div>
         </div>
 
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none mix-blend-screen opacity-20 z-0" style="background: radial-gradient(circle, var(--glow) 0%, transparent 70%)"></div>
+        <div class="flex-1 flex flex-col relative h-full">
+            
+            <div class="h-16 md:h-20 border-b border-[#AA771C]/20 bg-[var(--bg-deep)]/80 backdrop-blur flex items-center justify-between px-6 md:px-12 z-20 shadow-xl">
+                <div class="hidden md:block">
+                    <span class="text-xs text-gray-400 font-mono uppercase tracking-widest">Status: <span class="text-[var(--racing-green)] font-bold">Encrypted & Live</span></span>
+                </div>
+                
+                <audio id="arc-audio" src=""></audio>
+                <button id="audio-btn" onclick="toggleAudio()" class="gold-border px-4 py-2 md:px-6 md:py-3 text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-[#AA771C] hover:text-black transition-all ml-auto">
+                    🔊 [ INITIALIZE AUDIO ]
+                </button>
+            </div>
+
+            <div id="scroll-canvas" class="flex-1 overflow-y-auto p-6 md:p-16 scroll-smooth relative z-10 perspective-1000">
+                <div class="max-w-4xl mx-auto pb-32" id="lesson-content">
+                    </div>
+            </div>
+            
+            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-96 bg-gradient-to-t from-[var(--pure-cyan)]/5 to-transparent pointer-events-none z-0"></div>
+        </div>
     </div>
 
     <script>
-        // THE ARC DATABASE
-        const arcVaultData = {
-            sectors: [
+        // THE ARC BUSINESS MODEL VAULT
+        const arcData = {
+            models: [
                 {
-                    id: "battlezone",
-                    name: "Sector 01: Battlezone",
-                    modules: [
+                    id: "model-1",
+                    title: "MODEL 01: THE SAAS TOLL BOOTH",
+                    description: "High-Ticket Brokerage",
+                    isLocked: false,
+                    parts: [
                         {
-                            id: "bz-mod-1",
-                            name: "Module 1: Paradigm Shatter",
-                            lessons: [
-                                {
-                                    id: "bz-les-1",
-                                    title: "THE ILLUSION OF SAFETY",
-                                    audioSrc: "/audio/illusion-of-safety.mp3",
-                                    content: "They built a system designed to extract your most finite resource, your time! You trade the absolute best years of your life, for a depreciating currency. You are renting your existence, paying taxes on money you barely even touch. Escaping this is not a fairytale, it is a brutal bloodsport! Nobody is coming to save you. If you make $50,000 a year, inflation and taxes devour half of it before you even see it. You will work 40 hours a week for 40 years, just to retire too tired to enjoy it. But breaking out requires working 80 hours a week for yourself! There are no shortcuts, it will hurt. The traditional path is a rigged game! A salary is just a leash to keep you obedient, like a good little dog. You traded your twenties to be a glorified peasant! Breaking out is going to be hard, but staying a broke motherfucker is harder."
-                                },
-                                {
-                                    id: "bz-les-2",
-                                    title: "THE 40-YEAR TRAP",
-                                    audioSrc: "/audio/40-year-trap.mp3",
-                                    content: "Here is the brutal truth. Most people will spend 90,000 hours inside a cubicle. They will ask permission to go on vacation. They will beg for a 3% raise. Your boss does not pay you enough to get rich, they pay you just enough to not quit! If you do not find a way to decouple your time from your income, you will die poor. A 3% raise on a $60,000 salary is $1,800 a year. Inflation destroys 7% of your purchasing power in the exact same year! You are actively getting poorer every single day you stay. Trading hours for dollars is mathematical suicide! Your boss is basically keeping you on financial life support. If you don't detach your income from the clock, you are completely fucked."
-                                }
-                            ]
+                            id: "m1-p1",
+                            title: "PART 1: THE MIDDLEMAN SLAUGHTER",
+                            audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                            content: `
+                                <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">THE MIDDLEMAN SLAUGHTER</h1>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    Listen to me motherfucker - 🚀 You want to get rich? You need instant fucking liquidity. Not in ten years. Now. 
+                                </p>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    You do not build the software. You do not deal with customer support. You find the business owner who is bleeding out, you hand him the digital bandage, and you take a massive 50% cut of the transaction.
+                                </p>
+                                <div class="my-10 p-8 border border-[var(--vibrant-red)] bg-red-900/10 rounded-lg fly-in transform hover:scale-105 transition-transform duration-500 shadow-[0_0_20px_rgba(255,0,60,0.1)]">
+                                    <h3 class="text-[var(--vibrant-red)] font-black text-xl mb-4 tracking-widest uppercase">⚠️ THE MANIPULATION TACTIC</h3>
+                                    <p class="font-mono text-sm leading-relaxed">
+                                        Do not beg them to buy. Diagnose them. Tell an agency owner: "You are losing $4,000 a month in manual data entry. This AI CRM replaces your assistant for $500 a month." - They don't look at the price, they look at the $3,500 they just saved. You drop the affiliate link. You walk away. Let them chase you.
+                                    </p>
+                                </div>
+                            `
+                        },
+                        {
+                            id: "m1-p2",
+                            title: "PART 2: THE 60-DAY COOKIE TRAP",
+                            audio: "",
+                            content: `
+                                <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">THE 60-DAY COOKIE TRAP</h1>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    This is how you get paid while you sleep. - High-ticket buyers don't impulse buy. A CEO takes a week to think about a $5,000 expense. 
+                                </p>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    The tracking cookie you give them stays in their browser for 60 days! - Even if they leave, talk to their wife, and come back directly to the site a month later... the code remembers you sent them. The code wires you the cash. 
+                                </p>
+                                <h2 class="text-2xl font-black text-[#D4AF37] mb-6 fly-in mt-12">THE REAL WORLD SETUP:</h2>
+                                <ul class="list-none space-y-4 fly-in">
+                                    <li class="flex items-start"><span class="text-cyan-400 mr-4">➤</span> Go to PartnerStack or Impact.</li>
+                                    <li class="flex items-start"><span class="text-cyan-400 mr-4">➤</span> Apply for B2B CRM programs offering 40%+ recurring commissions.</li>
+                                    <li class="flex items-start"><span class="text-cyan-400 mr-4">➤</span> When asked how you promote, say: "I run a targeted B2B content funnel for digital agencies." - You get approved instantly.</li>
+                                </ul>
+                            `
                         }
                     ]
                 },
                 {
-                    id: "oasis-command",
-                    name: "Sector 02: Oasis Command",
-                    modules: [
+                    id: "model-2",
+                    title: "MODEL 02: B2B LEAD ARBITRAGE",
+                    description: "The Ghost Agency",
+                    isLocked: false,
+                    parts: [
                         {
-                            id: "oc-mod-1",
-                            name: "Module 1: The Core Infrastructure",
-                            lessons: [
-                                {
-                                    id: "oc-les-1",
-                                    title: "THE DIGITAL PRODUCT SHIELD",
-                                    audioSrc: "/audio/digital-shield.mp3",
-                                    content: "You need a baseline. Start by selling a digital asset for $47 to $49. Use platforms like Etsy, Gumroad, LemonSqueezy, or Whop. This is not to make you a millionaire, it is to build a list of proven buyers. This baseline revenue covers your software costs and buys you time to hunt. You sell a $49 guide on automating workflows, 100 people buy it, you make $4,900. Your rent and expenses are instantly covered. More importantly, you now have a localized database of 100 highly qualified leads. Weed out the broke freebie-seekers immediately! You need a shield to pay your daily bills. If a guy won't even pull out his credit card for 49 bucks to fix his business, he was never going to buy the five-thousand-dollar software anyway. Keep the buyers! The $4,900 pays your rent so you can hunt the big whales without stressing over groceries."
-                                }
-                            ]
+                            id: "m2-p1",
+                            title: "PART 1: THE BLEEDING NECK",
+                            audio: "",
+                            content: `
+                                <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">THE BLEEDING NECK</h1>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    Every single business on earth wants one thing: More paying clients. - 💸 If you can bring a roofing company or a solar business a list of people who want to buy, they will give you a blank fucking check.
+                                </p>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    You don't need a fancy website. You need a free Gmail account and a list of local businesses. You scrape leads, you blast them, you sell the positive replies for $100 to $500 a piece. 
+                                </p>
+                                <div class="my-10 p-8 border border-[var(--racing-green)] bg-green-900/10 rounded-lg fly-in shadow-[0_0_20px_rgba(0,66,37,0.3)]">
+                                    <h3 class="text-[var(--pure-cyan)] font-black text-xl mb-4 tracking-widest uppercase">💡 THE BIG DREAM</h3>
+                                    <p class="font-mono text-sm leading-relaxed text-gray-300">
+                                        You close one solar company. You send them 10 leads a week at $100 each. That is $1,000 a week pure profit from ONE client. Get five clients. Park that cash in Delta Exchange futures. That is how you build a financial fortress.
+                                    </p>
+                                </div>
+                            `
                         }
                     ]
                 },
                 {
-                    id: "instant-empire",
-                    name: "Sector 03: Instant Empire",
-                    modules: [
+                    id: "model-3",
+                    title: "MODEL 03: THE DIGITAL ASSET SHIELD",
+                    description: "Low-Ticket Cashflow",
+                    isLocked: false,
+                    parts: [
                         {
-                            id: "ie-mod-1",
-                            name: "Module 1: The High-Ticket Intercept",
-                            lessons: [
-                                {
-                                    id: "ie-les-1",
-                                    title: "THE CONNECTOR ECONOMY",
-                                    audioSrc: "/audio/connector-economy.mp3",
-                                    content: "You do not need to be a genius coder, or invent the next massive startup. You do not build the road, you assemble the toll booth, brick by brick. You stand directly between a desperate buyer and a perfect software solution. You extract wealth purely by controlling the flow of traffic! Uber does not own a single car, Airbnb does not own a single hotel, they are middlemen. You will be the middleman for enterprise software companies. They spend millions building the technology, you spend zero. You route the buyer and split the profit. Stop trying to be Steve Jobs! Just be the middleman, you don't need to invent anything. Look at Ticketmaster, they don’t sing, they don't play guitars, they just own the link between the fan and the concert, and they rake in billions! You are going to do the exact same thing for high-ticket software. Find the guy bleeding out, hand him the bandage, and take a massive cut."
-                                }
-                            ]
+                            id: "m3-p1",
+                            title: "PART 1: THE $47 GUMROAD WALL",
+                            audio: "",
+                            content: `
+                                <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">THE $47 WALL</h1>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    You cannot survive hunting big whales if you can't pay your rent. - You need a shield. 🛡️
+                                </p>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    You package your knowledge into a PDF. You price it at $47. You put it on Gumroad. This weeds out the broke freebie-seekers! If a motherfucker won't pay $47 to fix his life, he is useless to you. Keep the buyers. 
+                                </p>
+                                <h2 class="text-2xl font-black text-[#D4AF37] mb-6 fly-in mt-12">THE GUMROAD SETUP TRICK:</h2>
+                                <p class="text-lg leading-loose mb-8 fly-in text-gray-400">
+                                    When setting up your payout, make sure your bank details perfectly match the identity documents you submit. If you are underage or bypassing the live face check, you must legally coordinate with whoever's ID you are using. Do not fuck up the banking details. Get paid, stack the capital, and route it to your trading accounts.
+                                </p>
+                            `
                         }
                     ]
+                },
+                {
+                    id: "model-4",
+                    title: "MODEL 04: THE ESCAPE ROUTE",
+                    description: "Advanced Scaling Tactics",
+                    isLocked: true,
+                    parts: []
                 }
             ]
         };
 
-        // SYSTEM LOGIC
-        let currentSector = arcVaultData.sectors[0];
-        let currentLesson = currentSector.modules[0].lessons[0];
-        let isPlaying = false;
-        
+        let currentPart = arcData.models[0].parts[0];
+        let isAudioPlaying = false;
         const audioElement = document.getElementById('arc-audio');
-        const audioBtn = document.getElementById('audio-toggle-btn');
-        const scrollArea = document.getElementById('main-scroll-area');
+        const audioBtn = document.getElementById('audio-btn');
+        const scrollCanvas = document.getElementById('scroll-canvas');
 
-        // Handle audio ending naturally
-        audioElement.onended = () => {
-            isPlaying = false;
-            audioBtn.innerText = '[ INITIALIZE AUDIO ]';
-        };
-
-        function renderSectors() {
-            const strip = document.getElementById('sector-strip');
-            strip.innerHTML = '<div class="text-xl font-black tracking-tighter dynamic-accent mb-4 cursor-default">ARC</div>';
-            
-            arcVaultData.sectors.forEach(sec => {
-                const btn = document.createElement('button');
-                const isActive = sec.id === currentSector.id;
-                btn.className = `nav-btn w-12 h-12 md:w-14 md:h-14 rounded border flex items-center justify-center text-xs font-black transition-all ${isActive ? 'dynamic-border dynamic-accent bg-gray-950 scale-105' : 'border-gray-800 text-gray-500 hover:text-gray-300 hover:border-gray-700'}`;
-                btn.innerText = sec.id.slice(0, 2).toUpperCase();
-                btn.title = sec.name;
-                btn.onclick = () => {
-                    currentSector = sec;
-                    currentLesson = sec.modules[0].lessons[0];
-                    renderSectors();
-                    renderSidebar();
-                    loadLesson();
-                };
-                strip.appendChild(btn);
-            });
+        // SECURITY GATE LOGIC
+        function checkAccess() {
+            const code = document.getElementById('access-code').value;
+            if (code === 'ARC2026') {
+                document.getElementById('security-gate').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('security-gate').style.display = 'none';
+                    const app = document.getElementById('app-wrapper');
+                    app.classList.remove('hidden');
+                    // Small delay before fading in for dramatic effect
+                    setTimeout(() => app.style.opacity = '1', 100);
+                    initApp();
+                }, 800);
+            } else {
+                const err = document.getElementById('error-msg');
+                err.classList.remove('hidden');
+                setTimeout(() => err.classList.add('hidden'), 2000);
+            }
         }
 
+        // INITIALIZE APPLICATION
+        function initApp() {
+            renderSidebar();
+            loadContent(currentPart);
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        // RENDER SIDEBAR
         function renderSidebar() {
-            document.getElementById('sidebar-sector-title').innerText = currentSector.name;
-            const container = document.getElementById('sidebar-modules');
+            const container = document.getElementById('nav-container');
             container.innerHTML = '';
 
-            currentSector.modules.forEach(mod => {
-                let modHTML = `<div class="space-y-2">
-                    <div class="text-[10px] text-gray-600 uppercase tracking-wider font-bold pl-2">${mod.name}</div>
-                    <ul class="space-y-1">`;
+            arcData.models.forEach(model => {
+                const modelBlock = document.createElement('div');
+                modelBlock.className = 'mb-6';
                 
-                mod.lessons.forEach(les => {
-                    const isActive = les.id === currentLesson.id;
-                    modHTML += `<li>
-                        <button onclick="selectLesson('${les.id}')" class="nav-btn w-full text-left px-3 py-2 text-xs font-bold uppercase rounded tracking-wide transition-all ${isActive ? 'nav-active' : 'text-gray-400 hover:text-white hover:bg-gray-900/30 border-l-[3px] border-transparent'}">
-                            ${les.title}
-                        </button>
-                    </li>`;
-                });
-                modHTML += `</ul></div>`;
-                container.innerHTML += modHTML;
+                let html = `
+                    <div class="text-[10px] text-[#D4AF37] uppercase tracking-widest font-black mb-1 flex items-center justify-between">
+                        ${model.title}
+                        ${model.isLocked ? '<span class="text-red-500">🔒</span>' : ''}
+                    </div>
+                    <div class="text-xs text-gray-500 mb-3">${model.description}</div>
+                    <ul class="space-y-1 pl-2 border-l border-gray-800">
+                `;
+
+                if (!model.isLocked) {
+                    model.parts.forEach(part => {
+                        const isActive = currentPart.id === part.id ? 'active' : '';
+                        html += `
+                            <li>
+                                <button onclick="selectPart('${part.id}')" class="nav-item w-full text-left px-4 py-2 text-xs font-bold uppercase text-gray-300 ${isActive}">
+                                    ${part.title.split(':')[0]} </button>
+                            </li>
+                        `;
+                    });
+                } else {
+                    html += `<li><span class="nav-item locked block px-4 py-2 text-xs font-bold uppercase">Awaiting Transmission</span></li>`;
+                }
+
+                html += `</ul>`;
+                modelBlock.innerHTML = html;
+                container.appendChild(modelBlock);
             });
         }
 
-        function selectLesson(lessonId) {
-            currentSector.modules.forEach(mod => {
-                mod.lessons.forEach(les => {
-                    if (les.id === lessonId) currentLesson = les;
-                });
-            });
-            renderSidebar();
-            loadLesson();
-        }
-
-        function loadLesson() {
-            document.getElementById('lesson-title').innerText = currentLesson.title;
-            document.getElementById('lesson-text').innerText = currentLesson.content;
-            audioElement.src = currentLesson.audioSrc || "";
-            
-            // Lock the gate and reset scroll
-            document.getElementById('action-gate').style.display = 'flex';
-            document.getElementById('lesson-content').style.display = 'none';
-            scrollArea.scrollTop = 0;
-            
-            // Reset audio state
-            isPlaying = false;
-            audioElement.pause();
-            audioBtn.innerText = '[ INITIALIZE AUDIO ]';
-        }
-
-        function unlockContent() {
-            document.getElementById('action-gate').style.display = 'none';
-            document.getElementById('lesson-content').style.display = 'block';
-        }
-
-        function toggleAudio() {
-            if (!audioElement.src || audioElement.src.endsWith("/")) {
-                alert("Audio file not linked yet. Add the URL to the database.");
-                return;
-            }
-            if (isPlaying) {
-                audioElement.pause();
-                audioBtn.innerText = '[ INITIALIZE AUDIO ]';
-            } else {
-                audioElement.play().catch(e => console.log("Audio play blocked by browser."));
-                audioBtn.innerText = '[ PAUSE DICTATION ]';
-            }
-            isPlaying = !isPlaying;
-        }
-
-        // Initialize the Terminal on load
-        renderSectors();
-        renderSidebar();
-        loadLesson();
-    </script>
-</body>
-  </html>
-
+        function selectPart(partId) {
+            arcData.models.forEach(model => {
+                model.parts.forEach(part => {
