@@ -46,9 +46,10 @@
             box-shadow: 0 0 10px rgba(191, 149, 63, 0.3);
         }
 
-        /* 3D Levitation & Magic */
+        /* 3D Levitation */
         .levitate {
             animation: float 4s ease-in-out infinite;
+            transform-style: preserve-3d;
         }
         @keyframes float {
             0% { transform: translateY(0px) rotateX(0deg); }
@@ -109,10 +110,15 @@
             color: #888;
         }
 
-        /* Scrollbar hiding */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
         ::-webkit-scrollbar-thumb { background: #AA771C; border-radius: 10px; }
+        
+        .content-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(191, 149, 63, 0.2);
+            backdrop-filter: blur(5px);
+        }
     </style>
 </head>
 <body>
@@ -136,8 +142,8 @@
 
         <div id="sidebar" class="sidebar-panel w-72 h-full flex-shrink-0 flex flex-col absolute md:relative z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
             <div class="p-8 border-b border-[#AA771C]/20">
-                <h2 class="old-money-heading text-3xl levitate">ARC</h2>
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-2">Instant Liquidity Matrix</p>
+                <h2 class="old-money-heading text-4xl levitate cursor-default">ARC</h2>
+                <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-2 font-bold">Instant Liquidity Matrix</p>
             </div>
             
             <div class="flex-1 overflow-y-auto p-4 space-y-6" id="nav-container">
@@ -148,7 +154,7 @@
             
             <div class="h-16 md:h-20 border-b border-[#AA771C]/20 bg-[var(--bg-deep)]/80 backdrop-blur flex items-center justify-between px-6 md:px-12 z-20 shadow-xl">
                 <div class="hidden md:block">
-                    <span class="text-xs text-gray-400 font-mono uppercase tracking-widest">Status: <span class="text-[var(--racing-green)] font-bold">Encrypted & Live</span></span>
+                    <span class="text-xs text-gray-400 font-mono uppercase tracking-widest">Status: <span class="text-[var(--racing-green)] font-bold">Live & Connected</span></span>
                 </div>
                 
                 <audio id="arc-audio" src=""></audio>
@@ -157,7 +163,7 @@
                 </button>
             </div>
 
-            <div id="scroll-canvas" class="flex-1 overflow-y-auto p-6 md:p-16 scroll-smooth relative z-10 perspective-1000 pt-20 md:pt-16">
+            <div id="scroll-canvas" class="flex-1 overflow-y-auto p-6 md:p-16 scroll-smooth relative z-10 pt-24 md:pt-16">
                 <div class="max-w-4xl mx-auto pb-32" id="lesson-content">
                     </div>
             </div>
@@ -167,53 +173,57 @@
     </div>
 
     <script>
-        // THE ARC BUSINESS MODEL VAULT
+        // THE FULLY FLESHED OUT ARC VAULT DATABASE
         const arcData = {
             models: [
                 {
                     id: "model-1",
                     title: "MODEL 01: THE SAAS TOLL BOOTH",
-                    description: "High-Ticket Brokerage",
+                    description: "High-Ticket Middleman Protocol",
                     isLocked: false,
                     parts: [
                         {
                             id: "m1-p1",
-                            title: "PART 1: THE MIDDLEMAN SLAUGHTER",
-                            audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                            title: "PART 1: THE SLAUGHTER",
+                            audio: "",
                             content: `
                                 <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">THE MIDDLEMAN SLAUGHTER</h1>
                                 <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
-                                    Listen to me motherfucker - 🚀 You want to get rich? You need instant fucking liquidity. Not in ten years. Now. 
+                                    Listen to me motherfucker. You want to get rich? You need instant fucking liquidity. Not in ten years. Not after a college degree. NOW.
                                 </p>
                                 <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
-                                    You do not build the software. You do not deal with customer support. You find the business owner who is bleeding out, you hand him the digital bandage, and you take a massive 50% cut of the transaction.
+                                    Creating your own product is a suicide mission. Inventing software takes millions of dollars and a team of nerds. If it breaks, you lose everything. We bypass that slaughter entirely. You do not build the road. You assemble the toll booth.
                                 </p>
-                                <div class="my-10 p-8 border border-[var(--vibrant-red)] bg-red-900/10 rounded-lg fly-in transform hover:scale-105 transition-transform duration-500 shadow-[0_0_20px_rgba(255,0,60,0.1)]">
+                                <div class="my-10 p-8 border border-[var(--vibrant-red)] bg-red-900/10 rounded-lg fly-in levitate shadow-[0_0_20px_rgba(255,0,60,0.15)]">
                                     <h3 class="text-[var(--vibrant-red)] font-black text-xl mb-4 tracking-widest uppercase">⚠️ THE MANIPULATION TACTIC</h3>
-                                    <p class="font-mono text-sm leading-relaxed">
-                                        Do not beg them to buy. Diagnose them. Tell an agency owner: "You are losing $4,000 a month in manual data entry. This AI CRM replaces your assistant for $500 a month." - They don't look at the price, they look at the $3,500 they just saved. You drop the affiliate link. You walk away. Let them chase you.
+                                    <p class="font-mono text-sm leading-relaxed text-gray-300">
+                                        Salesmen beg. Operators prescribe. If you want an agency owner to buy a $5,000 CRM through your link, you don't talk about "cool features." You look at his business and say: <br><br>
+                                        <span class="text-white font-bold">"Your team is losing $4,000 a month in manual data entry. This AI system replaces your assistant for $500 a month."</span><br><br>
+                                        He doesn't look at the cost. He looks at the $3,500 he just saved. You drop the link, and you walk away. Let him chase you.
                                     </p>
                                 </div>
                             `
                         },
                         {
                             id: "m1-p2",
-                            title: "PART 2: THE 60-DAY COOKIE TRAP",
+                            title: "PART 2: THE 60-DAY COOKIE",
                             audio: "",
                             content: `
                                 <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">THE 60-DAY COOKIE TRAP</h1>
                                 <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
-                                    This is how you get paid while you sleep. - High-ticket buyers don't impulse buy. A CEO takes a week to think about a $5,000 expense. 
+                                    This is how you get paid while you sleep. High-ticket buyers do not impulse buy. A CEO takes a week to think about a massive expense. 
                                 </p>
                                 <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
-                                    The tracking cookie you give them stays in their browser for 60 days! - Even if they leave, talk to their wife, and come back directly to the site a month later... the code remembers you sent them. The code wires you the cash. 
+                                    When you give them your affiliate link, it drops an invisible tracking cookie in their browser. It stays there for 60 to 90 days! Even if they close the tab, talk to their board, and come back directly to the site a month later... the code remembers. The code wires you the cash.
                                 </p>
-                                <h2 class="text-2xl font-black text-[#D4AF37] mb-6 fly-in mt-12">THE REAL WORLD SETUP:</h2>
-                                <ul class="list-none space-y-4 fly-in">
-                                    <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">➤</span> Go to PartnerStack or Impact.</li>
-                                    <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">➤</span> Apply for B2B CRM programs offering 40%+ recurring commissions.</li>
-                                    <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">➤</span> When asked how you promote, say: "I run a targeted B2B content funnel for digital agencies." - You get approved instantly.</li>
-                                </ul>
+                                <div class="my-10 p-8 border border-[var(--pure-cyan)] content-box fly-in">
+                                    <h2 class="text-2xl font-black text-[var(--pure-cyan)] mb-6 uppercase tracking-widest">⚙️ THE SETUP PROTOCOL</h2>
+                                    <ul class="list-none space-y-4 text-sm font-mono text-gray-300">
+                                        <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">1.</span> Go to PartnerStack.com or Impact.com.</li>
+                                        <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">2.</span> Apply for B2B Enterprise CRM programs offering 40%+ recurring commissions.</li>
+                                        <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">3.</span> When asked how you promote, do not say "TikTok." Say: "I run a targeted B2B content funnel for digital marketing agencies." You will be approved instantly.</li>
+                                    </ul>
+                                </div>
                             `
                         }
                     ]
@@ -231,16 +241,39 @@
                             content: `
                                 <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">THE BLEEDING NECK</h1>
                                 <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
-                                    Every single business on earth wants one thing: More paying clients. - 💸 If you can bring a roofing company or a solar business a list of people who want to buy, they will give you a blank fucking check.
+                                    Every single offline business on earth wants one fucking thing: More paying clients. 
                                 </p>
                                 <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
-                                    You don't need a fancy website. You need a free Gmail account and a list of local businesses. You scrape leads, you blast them, you sell the positive replies for $100 to $500 a piece. 
+                                    If you can bring a local roofing company or a solar business a list of people who are begging to buy, they will write you a blank check. You do not need an office. You do not need employees. You are a Ghost Agency.
                                 </p>
-                                <div class="my-10 p-8 border border-[var(--racing-green)] bg-green-900/10 rounded-lg fly-in shadow-[0_0_20px_rgba(0,66,37,0.3)]">
-                                    <h3 class="text-[var(--electric-yellow)] font-black text-xl mb-4 tracking-widest uppercase">💡 THE BIG DREAM</h3>
+                                <div class="my-10 p-8 border border-[var(--racing-green)] bg-green-900/10 rounded-lg fly-in levitate shadow-[0_0_20px_rgba(0,66,37,0.3)]">
+                                    <h3 class="text-[var(--electric-yellow)] font-black text-xl mb-4 tracking-widest uppercase">💡 THE BIG DREAM SCALING</h3>
                                     <p class="font-mono text-sm leading-relaxed text-gray-300">
-                                        You close one solar company. You send them 10 leads a week at $100 each. That is $1,000 a week pure profit from ONE client. Get five clients. Park that cash in Delta Exchange futures. That is how you build a financial fortress.
+                                        You close one solar company. You send them 10 leads a week at $100 each. That is $1,000 a week pure profit from ONE client. Get five clients. You are now making $5,000 a week. Park that cash in Delta Exchange, trade AIOTUSD.P futures with precision, and watch your capital compound into a multi-million dollar fortress.
                                     </p>
+                                </div>
+                            `
+                        },
+                        {
+                            id: "m2-p2",
+                            title: "PART 2: SCRAPE & STRIKE",
+                            audio: "",
+                            content: `
+                                <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">SCRAPE & STRIKE</h1>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    How do you get the leads? You scrape them. Use tools like Apollo.io or D7 Lead Finder. You find businesses spending money on Google Ads but running shit websites.
+                                </p>
+                                <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
+                                    You don't sell them marketing. You sell them the END RESULT. Arbitrage the attention. Buy cheap clicks on Facebook, capture the lead info, and flip it to the local business owner for a 500% markup.
+                                </p>
+                                <div class="my-10 p-8 border border-[#D4AF37] content-box fly-in">
+                                    <h2 class="text-xl font-black text-[#D4AF37] mb-6 uppercase tracking-widest">✉️ THE LETHAL COLD EMAIL SCRIPT</h2>
+                                    <p class="font-mono text-sm text-gray-300 italic">
+                                        "Hey [Name],<br><br>
+                                        I have 5 homeowners in [City] looking to get solar installed this week. My usual partner is completely booked up. Can you handle the volume?<br><br>
+                                        Reply YES and I'll send you their phone numbers right now."
+                                    </p>
+                                    <p class="mt-4 text-xs text-[var(--pure-cyan)] uppercase font-bold tracking-widest">Notice: They will reply. Because you aren't selling a service, you are handing them free money.</p>
                                 </div>
                             `
                         }
@@ -248,26 +281,28 @@
                 },
                 {
                     id: "model-3",
-                    title: "MODEL 03: THE DIGITAL ASSET SHIELD",
+                    title: "MODEL 03: THE DIGITAL SHIELD",
                     description: "Low-Ticket Cashflow",
                     isLocked: false,
                     parts: [
                         {
                             id: "m3-p1",
-                            title: "PART 1: THE $47 GUMROAD WALL",
+                            title: "PART 1: THE $47 WALL",
                             audio: "",
                             content: `
                                 <h1 class="old-money-heading text-4xl md:text-6xl mb-8 fly-in">THE $47 WALL</h1>
                                 <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
-                                    You cannot survive hunting big whales if you can't pay your rent. - You need a shield. 🛡️
+                                    You cannot survive hunting big whales if you can't pay your fucking rent. You need a baseline. You need a shield.
                                 </p>
                                 <p class="text-lg md:text-xl leading-loose mb-8 fly-in text-gray-200">
-                                    You package your knowledge into a PDF. You price it at $47. You put it on Gumroad. This weeds out the broke freebie-seekers! If a motherfucker won't pay $47 to fix his life, he is useless to you. Keep the buyers. 
+                                    You package your knowledge into a high-value PDF document. You price it at $47 or $49. You put it on Gumroad. This weeds out the broke, useless freebie-seekers! If a guy won't pay $47 to fix his life, he is a waste of your breath.
                                 </p>
-                                <h2 class="text-2xl font-black text-[#D4AF37] mb-6 fly-in mt-12">THE GUMROAD SETUP TRICK:</h2>
-                                <p class="text-lg leading-loose mb-8 fly-in text-gray-400">
-                                    When setting up your payout, make sure your bank details perfectly match the identity documents you submit. If you are underage or bypassing the live face check, you must legally coordinate with whoever's ID you are using. Do not fuck up the banking details. Get paid, stack the capital, and route it to your trading accounts.
-                                </p>
+                                <div class="my-10 p-8 border border-[var(--pure-cyan)] bg-cyan-900/10 rounded-lg fly-in shadow-[0_0_20px_rgba(0,255,255,0.1)]">
+                                    <h3 class="text-[var(--pure-cyan)] font-black text-xl mb-4 tracking-widest uppercase">🏦 THE BANKING PROTOCOL</h3>
+                                    <p class="font-mono text-sm leading-relaxed text-gray-300">
+                                        When setting up your Gumroad payout, precision is everything. If you are underage or bypassing the live face check, you must legally coordinate with whoever's ID you are using (like a parent). The banking details MUST perfectly match the identity documents. If your bank says Prameshwar, do not type Parmeshwar. Get paid, stack the capital, and stay off the radar.
+                                    </p>
+                                </div>
                             `
                         }
                     ]
@@ -290,17 +325,12 @@
 
         // INITIALIZE APPLICATION
         window.onload = () => {
-            initApp();
-        };
-
-        function initApp() {
             renderSidebar();
             loadContent(currentPart);
-        }
+        };
 
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('-translate-x-full');
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
         }
 
         // RENDER SIDEBAR
@@ -318,86 +348,4 @@
                         ${model.isLocked ? '<span class="text-red-500">🔒</span>' : ''}
                     </div>
                     <div class="text-xs text-gray-500 mb-3">${model.description}</div>
-                    <ul class="space-y-1 pl-2 border-l border-gray-800">
-                `;
-
-                if (!model.isLocked) {
-                    model.parts.forEach(part => {
-                        const isActive = currentPart.id === part.id ? 'active' : '';
-                        html += `
-                            <li>
-                                <button onclick="selectPart('${part.id}')" class="nav-item w-full text-left px-4 py-2 text-xs font-bold uppercase text-gray-300 ${isActive}">
-                                    ${part.title.split(':')[0]}
-                                </button>
-                            </li>
-                        `;
-                    });
-                } else {
-                    html += `<li><span class="nav-item locked block px-4 py-2 text-xs font-bold uppercase">Awaiting Transmission</span></li>`;
-                }
-
-                html += `</ul>`;
-                modelBlock.innerHTML = html;
-                container.appendChild(modelBlock);
-            });
-        }
-
-        function selectPart(partId) {
-            arcData.models.forEach(model => {
-                model.parts.forEach(part => {
-                    if (part.id === partId) {
-                        currentPart = part;
-                        renderSidebar();
-                        loadContent(currentPart);
-                        if(window.innerWidth < 768) toggleSidebar(); 
-                    }
-                });
-            });
-        }
-
-        function loadContent(part) {
-            const container = document.getElementById('lesson-content');
-            container.innerHTML = part.content;
-            scrollCanvas.scrollTop = 0;
-
-            audioElement.src = part.audio || "";
-            isAudioPlaying = false;
-            audioElement.pause();
-            audioBtn.innerHTML = '🔊 [ INITIALIZE AUDIO ]';
-            
-            if ('mediaSession' in navigator) {
-                navigator.mediaSession.metadata = new MediaMetadata({
-                    title: part.title,
-                    artist: 'ARC PROTOCOL',
-                    album: 'The Vault'
-                });
-            }
-
-            setupScrollMagic();
-        }
-
-        // SCROLL REVEAL MAGIC
-        function setupScrollMagic() {
-            const elements = document.querySelectorAll('.fly-in');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            elements.forEach(el => observer.observe(el));
-            
-            setTimeout(() => {
-                elements.forEach((el, index) => {
-                    if(index < 3) el.classList.add('active');
-                });
-            }, 300);
-        }
-
-        // AUDIO ENGINE LOGIC
-        audioElement.onended = () => {
-            isAudioPlaying = false;
-            audioBtn.innerHTML = '🔊 [ INITIALIZE AUDIO ]
+                    <ul class="space-y-1 pl-2 borde
