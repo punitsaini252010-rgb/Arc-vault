@@ -20,6 +20,7 @@
             --vibrant-red: #FF003C;
             --pure-cyan: #00FFFF;
             --pure-white: #FFFFFF;
+            --electric-yellow: #FFD700;
         }
 
         body {
@@ -112,18 +113,11 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
         ::-webkit-scrollbar-thumb { background: #AA771C; border-radius: 10px; }
-
-        /* Security Gate */
-        #security-gate {
-            position: fixed;
-            inset: 0;
-            background: var(--bg-deep);
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease;
+        
+        /* App Wrapper Fade-In */
+        #app-wrapper {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
     </style>
 </head>
@@ -140,17 +134,7 @@
         });
     </script>
 
-    <div id="security-gate">
-        <h1 class="old-money-heading text-5xl md:text-7xl mb-8 levitate text-center">ARC_VAULT</h1>
-        <p class="text-gray-400 mb-6 font-mono text-sm tracking-widest uppercase">Encrypted Sector. Enter Access Code.</p>
-        <input type="password" id="access-code" class="bg-black/50 border border-[#AA771C] text-white px-6 py-3 text-center outline-none focus:shadow-[0_0_15px_rgba(191,149,63,0.5)] transition-all mb-6 w-64" placeholder="••••••">
-        <button onclick="checkAccess()" class="gold-border px-8 py-3 uppercase tracking-widest font-black text-xs hover:bg-[#AA771C] hover:text-black transition-colors">
-            [ DECRYPT ]
-        </button>
-        <p id="error-msg" class="text-[var(--vibrant-red)] mt-4 text-xs font-bold hidden uppercase tracking-widest">Access Denied.</p>
-    </div>
-
-    <div id="app-wrapper" class="flex h-screen w-screen opacity-0 hidden">
+    <div id="app-wrapper" class="flex h-screen w-screen">
         
         <button onclick="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 gold-border bg-[var(--bg-deep)] p-3 rounded">
             <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -232,9 +216,9 @@
                                 </p>
                                 <h2 class="text-2xl font-black text-[#D4AF37] mb-6 fly-in mt-12">THE REAL WORLD SETUP:</h2>
                                 <ul class="list-none space-y-4 fly-in">
-                                    <li class="flex items-start"><span class="text-cyan-400 mr-4">➤</span> Go to PartnerStack or Impact.</li>
-                                    <li class="flex items-start"><span class="text-cyan-400 mr-4">➤</span> Apply for B2B CRM programs offering 40%+ recurring commissions.</li>
-                                    <li class="flex items-start"><span class="text-cyan-400 mr-4">➤</span> When asked how you promote, say: "I run a targeted B2B content funnel for digital agencies." - You get approved instantly.</li>
+                                    <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">➤</span> Go to PartnerStack or Impact.</li>
+                                    <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">➤</span> Apply for B2B CRM programs offering 40%+ recurring commissions.</li>
+                                    <li class="flex items-start"><span class="text-[var(--pure-cyan)] mr-4 font-bold">➤</span> When asked how you promote, say: "I run a targeted B2B content funnel for digital agencies." - You get approved instantly.</li>
                                 </ul>
                             `
                         }
@@ -259,7 +243,7 @@
                                     You don't need a fancy website. You need a free Gmail account and a list of local businesses. You scrape leads, you blast them, you sell the positive replies for $100 to $500 a piece. 
                                 </p>
                                 <div class="my-10 p-8 border border-[var(--racing-green)] bg-green-900/10 rounded-lg fly-in shadow-[0_0_20px_rgba(0,66,37,0.3)]">
-                                    <h3 class="text-[var(--pure-cyan)] font-black text-xl mb-4 tracking-widest uppercase">💡 THE BIG DREAM</h3>
+                                    <h3 class="text-[var(--electric-yellow)] font-black text-xl mb-4 tracking-widest uppercase">💡 THE BIG DREAM</h3>
                                     <p class="font-mono text-sm leading-relaxed text-gray-300">
                                         You close one solar company. You send them 10 leads a week at $100 each. That is $1,000 a week pure profit from ONE client. Get five clients. Park that cash in Delta Exchange futures. That is how you build a financial fortress.
                                     </p>
@@ -310,27 +294,12 @@
         const audioBtn = document.getElementById('audio-btn');
         const scrollCanvas = document.getElementById('scroll-canvas');
 
-        // SECURITY GATE LOGIC
-        function checkAccess() {
-            const code = document.getElementById('access-code').value;
-            if (code === 'ARC2026') {
-                document.getElementById('security-gate').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('security-gate').style.display = 'none';
-                    const app = document.getElementById('app-wrapper');
-                    app.classList.remove('hidden');
-                    // Small delay before fading in for dramatic effect
-                    setTimeout(() => app.style.opacity = '1', 100);
-                    initApp();
-                }, 800);
-            } else {
-                const err = document.getElementById('error-msg');
-                err.classList.remove('hidden');
-                setTimeout(() => err.classList.add('hidden'), 2000);
-            }
-        }
-
         // INITIALIZE APPLICATION
+        window.onload = () => {
+            document.getElementById('app-wrapper').style.opacity = '1';
+            initApp();
+        };
+
         function initApp() {
             renderSidebar();
             loadContent(currentPart);
@@ -365,7 +334,8 @@
                         html += `
                             <li>
                                 <button onclick="selectPart('${part.id}')" class="nav-item w-full text-left px-4 py-2 text-xs font-bold uppercase text-gray-300 ${isActive}">
-                                    ${part.title.split(':')[0]} </button>
+                                    ${part.title.split(':')[0]}
+                                </button>
                             </li>
                         `;
                     });
@@ -382,3 +352,52 @@
         function selectPart(partId) {
             arcData.models.forEach(model => {
                 model.parts.forEach(part => {
+                    if (part.id === partId) {
+                        currentPart = part;
+                        renderSidebar();
+                        loadContent(currentPart);
+                        if(window.innerWidth < 768) toggleSidebar(); 
+                    }
+                });
+            });
+        }
+
+        function loadContent(part) {
+            const container = document.getElementById('lesson-content');
+            container.innerHTML = part.content;
+            scrollCanvas.scrollTop = 0;
+
+            audioElement.src = part.audio || "";
+            isAudioPlaying = false;
+            audioElement.pause();
+            audioBtn.innerHTML = '🔊 [ INITIALIZE AUDIO ]';
+            
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: part.title,
+                    artist: 'ARC PROTOCOL',
+                    album: 'The Vault'
+                });
+            }
+
+            setupScrollMagic();
+        }
+
+        // SCROLL REVEAL MAGIC
+        function setupScrollMagic() {
+            const elements = document.querySelectorAll('.fly-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => observer.observe(el));
+            
+            setTimeout(() => {
+                elements.forEach((el, index) => {
+                    if(index < 3) el.classList.add('active');
+                }
